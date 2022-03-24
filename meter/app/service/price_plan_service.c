@@ -29,6 +29,10 @@ static int calculate_cost(struct price_plan_service* service, struct price_plan*
 }
 
 size_t price_plan_service_compare_all(struct price_plan_service* service, struct plan_charge* results, size_t count) {
+  if (count < service->plans_count) {
+    return 0;
+  }
+
   size_t readings_count = electricity_reading_repo_get_count(service->reading_repo);
 
   if (readings_count == 0) {
@@ -42,29 +46,24 @@ size_t price_plan_service_compare_all(struct price_plan_service* service, struct
   return service->plans_count;
 }
 
-int compare_charge(const void* a, const void* b) {
+static int compare_charge(const void* a, const void* b) {
   const struct plan_charge* x = (const struct plan_charge*)a;
   const struct plan_charge* y = (const struct plan_charge*)b;
   return x->charge - y->charge;
 }
 
 size_t price_plan_service_recommend(struct price_plan_service* service, struct plan_charge* results, size_t limit) {
-  size_t readings_count = electricity_reading_repo_get_count(service->reading_repo);
-
-  if (readings_count == 0) {
-    return 0;
-  }
-
   struct plan_charge charges[service->plans_count];
-  for (size_t i = 0; i < service->plans_count; ++i) {
-    charges[i].plan = service->plans[i].name;
-    charges[i].charge = calculate_cost(service, &service->plans[i]);
+  size_t count = price_plan_service_compare_all(service, charges, service->plans_count);
+
+  if (count > 0) {
+    qsort(charges, service->plans_count, sizeof(charges[0]), compare_charge);
+    count = count > limit ? limit : count;
+    for (size_t i = 0; i < count; ++i) {
+      results[i].plan = charges->plan;
+      results[i].charge = charges[i].charge;
+    }
   }
-  qsort(charges, service->plans_count, sizeof(charges[0]), compare_charge);
-  size_t count = service->plans_count > limit ? limit : service->plans_count;
-  for (size_t i = 0; i < count; ++i) {
-    results[i].plan = charges->plan;
-    results[i].charge = charges[i].charge;
-  }
+
   return count;
 }
