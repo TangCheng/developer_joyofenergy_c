@@ -1,7 +1,7 @@
 #include "reading.h"
-#include "protocol.h"
+#include "adapter/protocol/protocol.h"
 
-#include <app/service/electricity_reading_service.h>
+#include "app/service/electricity_reading_service.h"
 
 struct message reading_read(struct readings_controller* controller, const struct message* request) {
   struct message response;

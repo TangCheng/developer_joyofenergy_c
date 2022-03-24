@@ -1,6 +1,6 @@
 #include "protocol.h"
 
-#include "reading.h"
+#include "adapter/controller/reading.h"
 
 struct message default_handle(struct protocol* controller, const struct message* request) {
   struct message message = {0};

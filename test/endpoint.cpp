@@ -1,5 +1,5 @@
 #include <adapter/protocol/protocol.h>
-#include <adapter/protocol/reading.h>
+#include "adapter/controller/reading.h"
 #include <gmock/gmock.h>
 #include <mocks/bsp.h>
 #include <mocks/electricity_reading_repo.h>

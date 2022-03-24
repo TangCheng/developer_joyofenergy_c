@@ -5,7 +5,7 @@
 #include <hal/endpoint.h>
 #include <stdbool.h>
 
-#include "price_plan.h"
+#include "adapter/controller/price_plan.h"
 
 enum message_type {
   MESSAGE_INVALID = 0,

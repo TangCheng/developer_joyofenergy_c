@@ -1,6 +1,6 @@
 #ifndef DEVELOPER_JOYOFENERGY_C_PROTOCOL_PRICE_PLAN_H
 #define DEVELOPER_JOYOFENERGY_C_PROTOCOL_PRICE_PLAN_H
-#include <app/service/price_plan_service.h>
+#include "app/service/price_plan_service.h"
 
 struct price_plan_controller {
   struct price_plan_service* service;

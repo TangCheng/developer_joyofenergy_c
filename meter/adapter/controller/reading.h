@@ -1,8 +1,8 @@
 #ifndef DEVELOPER_JOYOFENERGY_C_READING_H
 #define DEVELOPER_JOYOFENERGY_C_READING_H
 
-#include <hal/endpoint.h>
-#include <domain/electricity_reading.h>
+#include "hal/endpoint.h"
+#include "domain/electricity_reading.h"
 
 struct readings_controller {
   struct electricity_reading_service* service;
