@@ -6,6 +6,7 @@
 #include "adapter/schedule/schedule.h"
 #include "adapter/protocol/protocol.h"
 #include "app/service/electricity_reading_service.h"
+#include "domain/electricity_reading_repo.h"
 #include "hal/bsp.h"
 
 #ifdef __cplusplus
@@ -14,8 +15,6 @@ extern "C" {
 
 struct meter {
   struct bsp* bsp;
-  struct electricity_reading readings[1024];
-  size_t readings_count;
   struct price_plan plans[5];
   size_t plans_count;
   struct electricity_reading_service reading_service;
@@ -24,7 +23,7 @@ struct meter {
   struct protocol protocol;
 };
 
-int meter_init(struct meter* meter, struct bsp* bsp);
+int meter_init(struct meter* meter, struct bsp* bsp, struct electricity_reading_repo* repo);
 bool meter_process(struct meter* meter);
 
 #ifdef __cplusplus

@@ -5,15 +5,15 @@
 #include "electricity_reading_service.h"
 
 struct price_plan_service {
-  struct electricity_reading_service* reading_service;
+  struct electricity_reading_repo* reading_repo;
   struct price_plan* plans;
   size_t plans_count;
 };
 
 static inline void price_plan_service_init(struct price_plan_service* service,
-                                           struct electricity_reading_service* reading_service, struct price_plan* plans,
-                                           size_t plans_count) {
-  service->reading_service = reading_service;
+                                           struct electricity_reading_repo* reading_repo,
+                                           struct price_plan* plans, size_t plans_count) {
+  service->reading_repo = reading_repo;
   service->plans = plans;
   service->plans_count = plans_count;
 }

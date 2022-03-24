@@ -2,6 +2,7 @@
 #include <adapter/protocol/reading.h>
 #include <gmock/gmock.h>
 #include <mocks/bsp.h>
+#include <mocks/electricity_reading_repo.h>
 
 #include "meter.h"
 
@@ -9,7 +10,8 @@ class EndpointTest : public ::testing::Test {
  protected:
   void SetUp() override {
     bsp_mock_init(&mock);
-    meter_init(&meter, (struct bsp *)&mock);
+    electricity_reading_repo_mock_init(&repo_mock, 21);
+    meter_init(&meter, (struct bsp *)&mock, (struct electricity_reading_repo *)&repo_mock);
   }
 
   struct message make_request(message_type requestType) {
@@ -18,9 +20,10 @@ class EndpointTest : public ::testing::Test {
     req.head.type = requestType;
     return req;
   }
-  
+
   struct bsp_mock mock;
   struct meter meter;
+  struct electricity_reading_repo_mock repo_mock;
 };
 
 TEST_F(EndpointTest, ShouldReadReading) {
