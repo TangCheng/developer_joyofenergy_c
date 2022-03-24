@@ -1,8 +1,9 @@
 #ifndef DEVELOPER_JOYOFENERGY_C_MOCK_ENDPOINT_H
 #define DEVELOPER_JOYOFENERGY_C_MOCK_ENDPOINT_H
-#include <hal/endpoint.h>
+
 #include <stdbool.h>
-#include <stdlib.h>
+
+#include "hal/endpoint.h"
 
 struct buffer {
   size_t size;

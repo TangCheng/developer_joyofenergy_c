@@ -1,9 +1,10 @@
 #ifndef DEVELOPER_JOYOFENERGY_C_MOCK_BSP_H
 #define DEVELOPER_JOYOFENERGY_C_MOCK_BSP_H
 
-#include "clock.h"
-#include "endpoint.h"
-#include "metrology.h"
+#include "hal/bsp.h"
+#include "mocks/clock.h"
+#include "mocks/endpoint.h"
+#include "mocks/metrology.h"
 
 struct bsp_mock {
   struct clock_mock clock;

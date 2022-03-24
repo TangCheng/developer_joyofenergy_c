@@ -1,5 +1,7 @@
 #include "price_plan_service.h"
 
+#include <stdlib.h>
+
 static int calculate_average_reading(struct price_plan_service* service) {
   int sum = 0;
   size_t readings_count = electricity_reading_repo_get_count(service->reading_repo);

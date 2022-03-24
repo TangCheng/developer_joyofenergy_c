@@ -1,10 +1,11 @@
-#include <adapter/protocol/protocol.h>
-#include "adapter/controller/reading.h"
 #include <gmock/gmock.h>
-#include <mocks/bsp.h>
-#include <mocks/electricity_reading_repo.h>
 
+#include "adapter/protocol/protocol.h"
 #include "meter.h"
+
+#include "mocks/bsp.h"
+#include "mocks/electricity_reading_repo.h"
+
 
 class EndpointTest : public ::testing::Test {
  protected:

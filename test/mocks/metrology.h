@@ -1,6 +1,8 @@
 #ifndef DEVELOPER_JOYOFENERGY_C_MOCK_METROLOGY_H
 #define DEVELOPER_JOYOFENERGY_C_MOCK_METROLOGY_H
 
+#include "hal/metrology.h"
+
 struct metrology_mock {
   int power;
 };

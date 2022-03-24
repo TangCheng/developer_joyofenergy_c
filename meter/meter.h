@@ -3,11 +3,8 @@
 
 #include <stdbool.h>
 
+#include "adapter/controller/router.h"
 #include "adapter/schedule/schedule.h"
-#include "adapter/protocol/protocol.h"
-#include "app/service/electricity_reading_service.h"
-#include "domain/electricity_reading_repo.h"
-#include "hal/bsp.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -20,7 +17,7 @@ struct meter {
   struct electricity_reading_service reading_service;
   struct price_plan_service price_plan_service;
   struct schedule schedule;
-  struct protocol protocol;
+  struct router router;
 };
 
 int meter_init(struct meter* meter, struct bsp* bsp, struct electricity_reading_repo* repo);

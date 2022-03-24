@@ -1,6 +1,8 @@
 #ifndef DEVELOPER_JOYOFENERGY_C_PRICE_PLAN_H
 #define DEVELOPER_JOYOFENERGY_C_PRICE_PLAN_H
+
 #include <string.h>
+
 struct price_plan {
   char supplier[256];
   char name[256];

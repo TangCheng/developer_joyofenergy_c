@@ -1,8 +1,9 @@
 #ifndef DEVELOPER_JOYOFENERGY_C_SCHEDULE_H
 #define DEVELOPER_JOYOFENERGY_C_SCHEDULE_H
-#include <app/service/electricity_reading_service.h>
-#include <hal/bsp.h>
-#include <hal/clock.h>
+
+#include "app/service/electricity_reading_service.h"
+#include "hal/bsp.h"
+#include "hal/clock.h"
 
 struct schedule {
   struct electricity_reading_service* reading_service;

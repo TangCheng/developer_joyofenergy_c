@@ -1,6 +1,5 @@
 #include "endpoint.h"
 
-#include <hal/endpoint.h>
 #include <string.h>
 
 const struct buffer endpoint_mock_receive(struct endpoint_mock* mock) {

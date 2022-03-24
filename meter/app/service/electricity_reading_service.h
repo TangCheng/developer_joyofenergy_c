@@ -1,8 +1,6 @@
 #ifndef DEVELOPER_JOYOFENERGY_C_ELECTRICITY_READING_SERVICE_H
 #define DEVELOPER_JOYOFENERGY_C_ELECTRICITY_READING_SERVICE_H
 
-#include <string.h>
-
 #include "domain/electricity_reading.h"
 #include "domain/electricity_reading_repo.h"
 #include "hal/bsp.h"

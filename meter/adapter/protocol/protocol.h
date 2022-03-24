@@ -1,11 +1,7 @@
 #ifndef DEVELOPER_JOYOFENERGY_C_PROTOCOL_H
 #define DEVELOPER_JOYOFENERGY_C_PROTOCOL_H
 
-#include <app/service/electricity_reading_service.h>
-#include <hal/endpoint.h>
-#include <stdbool.h>
-
-#include "adapter/controller/price_plan.h"
+#include <stdint.h>
 
 enum message_type {
   MESSAGE_INVALID = 0,
@@ -25,16 +21,4 @@ struct message {
   char payload[1024];
 };
 
-struct protocol {
-  struct electricity_reading_service* reading_service;
-  struct price_plan_service* plan_service;
-};
-
-static inline void protocol_init(struct protocol* router, struct electricity_reading_service* reading_service,
-                                 struct price_plan_service* plan_service) {
-  router->reading_service = reading_service;
-  router->plan_service = plan_service;
-}
-
-bool protocol_process(struct protocol* protocol, struct endpoint* endpoint);
 #endif  // DEVELOPER_JOYOFENERGY_C_PROTOCOL_H

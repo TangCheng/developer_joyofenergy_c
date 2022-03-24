@@ -1,7 +1,5 @@
 #include "electricity_reading_repo.h"
 
-#include <assert.h>
-
 static inline struct electricity_reading_repo_mock* mock(struct electricity_reading_repo* repo) {
   return (struct electricity_reading_repo_mock*)repo;
 }

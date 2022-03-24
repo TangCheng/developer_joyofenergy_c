@@ -1,8 +1,8 @@
 #ifndef DEVELOPER_JOYOFENERGY_C_PRICE_PLAN_SERVICE_H
 #define DEVELOPER_JOYOFENERGY_C_PRICE_PLAN_SERVICE_H
-#include <domain/price_plan.h>
 
-#include "electricity_reading_service.h"
+#include "domain/electricity_reading_repo.h"
+#include "domain/price_plan.h"
 
 struct price_plan_service {
   struct electricity_reading_repo* reading_repo;

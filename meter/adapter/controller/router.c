@@ -1,15 +1,15 @@
-#include "protocol.h"
+#include "router.h"
 
-#include "adapter/controller/reading.h"
+#include "adapter/protocol/protocol.h"
 
-struct message default_handle(struct protocol* controller, const struct message* request) {
+struct message default_handle(void* controller, const struct message* request) {
   struct message message = {0};
   return message;
 }
 
 typedef struct message (*handle_func)(void* controller, const struct message* request);
 
-static struct message protocol_handle(struct protocol* router, const struct message* request) {
+static struct message router_protocol_handle(struct router* router, const struct message* request) {
   struct readings_controller readings;
   readings_controller_init(&readings, router->reading_service);
   struct price_plan_controller price_plan;
@@ -36,14 +36,14 @@ static struct message protocol_handle(struct protocol* router, const struct mess
   return func(handler, request);
 }
 
-bool protocol_process(struct protocol* protocol, struct endpoint* endpoint) {
+bool router_process(struct router* router, struct endpoint* endpoint) {
   char buffer[1024];
   int rec = endpoint_receive(endpoint, buffer, sizeof(buffer));
   if (rec == 0) {
     return true;
   }
   struct message* request = (struct message*)buffer;
-  struct message response = protocol_handle(protocol, request);
+  struct message response = router_protocol_handle(router, request);
   endpoint_send(endpoint, &response, sizeof(response));
   return false;
 }

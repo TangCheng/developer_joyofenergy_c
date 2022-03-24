@@ -1,7 +1,7 @@
 #ifndef DEVELOPER_JOYOFENERGY_C_MOCK_CLOCK_H
 #define DEVELOPER_JOYOFENERGY_C_MOCK_CLOCK_H
 
-#include <hal/clock.h>
+#include "hal/clock.h"
 
 struct clock_mock {
   time_t now;

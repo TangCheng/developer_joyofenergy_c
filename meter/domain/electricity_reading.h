@@ -1,7 +1,8 @@
 #ifndef DEVELOPER_JOYOFENERGY_C_ELECTRICITY_READING_H
 #define DEVELOPER_JOYOFENERGY_C_ELECTRICITY_READING_H
-#include <time.h>
+
 #include <stdint.h>
+#include <time.h>
 
 struct electricity_reading {
   time_t at;

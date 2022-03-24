@@ -1,1 +1,1 @@
-target_sources(meter PRIVATE price_plan.c reading.c)
+target_sources(meter PRIVATE price_plan.c reading.c router.c)
