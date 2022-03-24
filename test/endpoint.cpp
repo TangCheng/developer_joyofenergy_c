@@ -44,7 +44,7 @@ TEST_F(EndpointTest, ShouldReadReading) {
 }
 
 TEST_F(EndpointTest, ShouldStoreReadingAfter15Minutes) {
-  clock_forward_minutes(&mock.clock, 15);
+  clock_forward_minutes(&mock.clock, READING_STORE_PERIOD_MINUTES);
   const int power = 5000;
   metrology_mock_set_power(&mock.metrology, power);
 

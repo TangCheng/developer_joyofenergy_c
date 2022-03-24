@@ -5,15 +5,19 @@
 
 #include "hal/endpoint.h"
 
+#define ENDPOINT_BUFFER_DATA_SIZE 1024
+#define ENDPOINT_IN_BUFFERS 100
+#define ENDPOINT_OUT_BUFFERS 100
+
 struct buffer {
   size_t size;
-  char data[1024];
+  char data[ENDPOINT_BUFFER_DATA_SIZE];
 };
 
 struct endpoint_mock {
-  struct buffer in_buffers[100];
+  struct buffer in_buffers[ENDPOINT_IN_BUFFERS];
   size_t in_buffers_length;
-  struct buffer out_buffers[100];
+  struct buffer out_buffers[ENDPOINT_OUT_BUFFERS];
   size_t out_buffers_length;
 };
 

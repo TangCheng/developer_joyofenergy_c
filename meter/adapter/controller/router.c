@@ -37,7 +37,7 @@ static struct message router_protocol_handle(struct router* router, const struct
 }
 
 bool router_process(struct router* router, struct endpoint* endpoint) {
-  char buffer[1024];
+  char buffer[MESSAGE_LENGTH];
   int rec = endpoint_receive(endpoint, buffer, sizeof(buffer));
   if (rec == 0) {
     return true;

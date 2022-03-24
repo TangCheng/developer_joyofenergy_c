@@ -5,6 +5,9 @@
 #include "hal/bsp.h"
 #include "hal/clock.h"
 
+#define READING_STORE_PERIOD_MINUTES 15
+#define READING_STORE_PERIOD_SECONDES (READING_STORE_PERIOD_MINUTES * 60)
+
 struct schedule {
   struct electricity_reading_service* reading_service;
   time_t last_time;
@@ -21,7 +24,7 @@ static inline bool schedule_process(struct schedule* schedule) {
   time_t now = clock_now(bsp_clock(schedule->bsp));
   time_t elapsed = now - schedule->last_time;
   schedule->last_time = now;
-  if (elapsed == 60 * 15) {
+  if (elapsed >= READING_STORE_PERIOD_SECONDES) {
     electricity_reading_service_store(schedule->reading_service);
   }
   return true;

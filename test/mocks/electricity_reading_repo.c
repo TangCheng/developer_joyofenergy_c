@@ -6,7 +6,7 @@ static inline struct electricity_reading_repo_mock* mock(struct electricity_read
 
 size_t electricity_reading_repo_save(struct electricity_reading_repo* repo, struct electricity_reading* reading)
 {
-  assert(mock(repo)->count < 1024);
+  assert(mock(repo)->count < MAX_ELECTRICITY_READING_COUNT);
   mock(repo)->readings[mock(repo)->count] = *reading;
   mock(repo)->count++;
 }

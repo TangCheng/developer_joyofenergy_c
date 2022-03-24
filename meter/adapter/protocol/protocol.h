@@ -16,9 +16,13 @@ struct message_head {
   char payload[0];
 };
 
+#define MESSAGE_PAYLOAD_LENGTH 1024
+
 struct message {
   struct message_head head;
-  char payload[1024];
+  char payload[MESSAGE_PAYLOAD_LENGTH];
 };
+
+#define MESSAGE_LENGTH (MESSAGE_PAYLOAD_LENGTH + sizeof(struct message_head))
 
 #endif  // DEVELOPER_JOYOFENERGY_C_PROTOCOL_H
