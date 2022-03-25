@@ -1,6 +1,7 @@
 #ifndef DEVELOPER_JOYOFENERGY_C_ADAPTER_CONTROLLER_PRICE_PLAN_H
 #define DEVELOPER_JOYOFENERGY_C_ADAPTER_CONTROLLER_PRICE_PLAN_H
 
+#include "adapter/protocol/protocol.h"
 #include "app/service/price_plan_service.h"
 
 struct price_plan_controller {
@@ -31,8 +32,8 @@ static inline void price_plan_controller_init(struct price_plan_controller* cont
   controller->service = service;
 }
 
-struct message price_plan_controller_compare_all(struct price_plan_controller* controller, const struct message* request);
+void price_plan_controller_compare_all(struct price_plan_controller* controller, const struct message* request, struct message* response);
 
-struct message price_plan_controller_recommend(struct price_plan_controller* controller, const struct message* request);
+void price_plan_controller_recommend(struct price_plan_controller* controller, const struct message* request, struct message* response);
 
 #endif  // DEVELOPER_JOYOFENERGY_C_ADAPTER_CONTROLLER_PRICE_PLAN_H

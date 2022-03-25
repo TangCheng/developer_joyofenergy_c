@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 
+#include "adapter/protocol/protocol.h"
 #include "app/service/cost_usage_service.h"
 
 struct cost_usage_controller {
@@ -18,6 +19,6 @@ struct cost_usage_response {
   uint32_t cost;
 };
 
-struct message cost_usage_controller_read(struct cost_usage_controller* controller, const struct message* request);
+void cost_usage_controller_read(struct cost_usage_controller* controller, const struct message* request, struct message* response);
 
 #endif // DEVELOPER_JOYOFENERGY_C_ADAPTER_CONTROLLER_COST_USAGE_H

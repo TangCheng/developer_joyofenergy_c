@@ -2,12 +2,10 @@
 
 #include "adapter/protocol/protocol.h"
 
-struct message default_handle(void* controller, const struct message* request) {
-  struct message message = {0};
-  return message;
+void default_handle(void* controller, const struct message* request, struct message* response) {
 }
 
-typedef struct message (*handle_func)(void* controller, const struct message* request);
+typedef void (*handle_func)(void* controller, const struct message* request, struct message* response);
 
 static struct message router_protocol_handle(struct router* router, const struct message* request) {
   struct readings_controller readings;
@@ -40,7 +38,11 @@ static struct message router_protocol_handle(struct router* router, const struct
     default:
       break;
   }
-  return func(handler, request);
+
+  struct message response;
+  response.head.type = request->head.type;
+  func(handler, request, &response);
+  return response;
 }
 
 bool router_process(struct router* router, struct endpoint* endpoint) {

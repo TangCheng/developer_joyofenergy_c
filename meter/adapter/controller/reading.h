@@ -1,6 +1,7 @@
 #ifndef DEVELOPER_JOYOFENERGY_C_ADAPTER_CONTROLLER_READING_H
 #define DEVELOPER_JOYOFENERGY_C_ADAPTER_CONTROLLER_READING_H
 
+#include "adapter/protocol/protocol.h"
 #include "app/service/electricity_reading_service.h"
 #include "configuration.h"
 
@@ -18,6 +19,6 @@ struct reading_message_response {
   struct electricity_reading readings[MAX_ELECTRICITY_READING_COUNT];
 };
 
-struct message reading_read(struct readings_controller* controller, const struct message* request);
+void reading_read(struct readings_controller* controller, const struct message* request, struct message* response);
 
 #endif  // DEVELOPER_JOYOFENERGY_C_ADAPTER_CONTROLLER_READING_H
