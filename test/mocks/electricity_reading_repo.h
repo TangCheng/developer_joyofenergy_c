@@ -11,7 +11,7 @@ struct electricity_reading_repo_mock {
   size_t count;
 };
 
-void electricity_reading_repo_mock_init(struct electricity_reading_repo_mock *repo, size_t number) {
+static inline void electricity_reading_repo_mock_init(struct electricity_reading_repo_mock *repo, size_t number) {
   assert(number <= MAX_ELECTRICITY_READING_COUNT);
   time_t now = time(NULL);
   for (size_t i = 0; i < number; ++i) {
