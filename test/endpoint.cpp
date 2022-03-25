@@ -6,12 +6,11 @@
 #include "mocks/bsp.h"
 #include "mocks/electricity_reading_repo.h"
 
-
 class EndpointTest : public ::testing::Test {
  protected:
   void SetUp() override {
     bsp_mock_init(&mock);
-    electricity_reading_repo_mock_init(&repo_mock, 21);
+    electricity_reading_repo_mock_init(&repo_mock, init_reading_count);
     meter_init(&meter, (struct bsp *)&mock, (struct electricity_reading_repo *)&repo_mock);
   }
 
@@ -25,6 +24,7 @@ class EndpointTest : public ::testing::Test {
   struct bsp_mock mock;
   struct meter meter;
   struct electricity_reading_repo_mock repo_mock;
+  const size_t init_reading_count = 21;
 };
 
 TEST_F(EndpointTest, ShouldReadReading) {
@@ -39,7 +39,7 @@ TEST_F(EndpointTest, ShouldReadReading) {
   ASSERT_EQ(response->head.type, MESSAGE_READINGS_READ);
   ASSERT_GT(response->head.size, sizeof(response->head));
   struct reading_message_response *data = (struct reading_message_response *)response->payload;
-  ASSERT_EQ(data->readings_count, 21);
+  ASSERT_EQ(data->readings_count, init_reading_count);
   ASSERT_EQ(data->readings[0].power, 4000);
 }
 
@@ -57,9 +57,9 @@ TEST_F(EndpointTest, ShouldStoreReadingAfter15Minutes) {
   ASSERT_GT(received.size, 0);
   struct message *response = (struct message *)received.data;
   struct reading_message_response *data = (struct reading_message_response *)response->payload;
-  ASSERT_EQ(data->readings_count, 22);
-  ASSERT_EQ(data->readings[21].power, power);
-  ASSERT_EQ(data->readings[21].at, mock.clock.now);
+  ASSERT_EQ(data->readings_count, init_reading_count + 1);
+  ASSERT_EQ(data->readings[data->readings_count - 1].power, power);
+  ASSERT_EQ(data->readings[data->readings_count - 1].at, mock.clock.now);
 }
 
 TEST_F(EndpointTest, ShouldCompareAllPricePlan) {
