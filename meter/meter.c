@@ -22,7 +22,7 @@ int meter_init(struct meter* meter, struct bsp* bsp, struct electricity_reading_
   electricity_reading_service_init(&meter->reading_service, bsp, repo);
   price_plan_service_init(&meter->price_plan_service, repo, meter->plans, meter->plans_count);
   schedule_init(&meter->schedule, &meter->reading_service, bsp);
-  router_init(&meter->router, &meter->reading_service, &meter->price_plan_service);
+  router_init(&meter->router, &meter->reading_service, &meter->price_plan_service, &meter->cost_usage_service);
   return 0;
 }
 

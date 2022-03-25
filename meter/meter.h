@@ -16,6 +16,7 @@ struct meter {
   size_t plans_count;
   struct electricity_reading_service reading_service;
   struct price_plan_service price_plan_service;
+  struct cost_usage_service cost_usage_service;
   struct schedule schedule;
   struct router router;
 };

@@ -39,7 +39,7 @@ TEST_F(EndpointTest, ShouldReadReading) {
   ASSERT_EQ(response->head.type, MESSAGE_READINGS_READ);
   ASSERT_GT(response->head.size, sizeof(response->head));
   struct reading_message_response *data = (struct reading_message_response *)response->payload;
-  ASSERT_EQ(data->readings_count, init_reading_count);
+  ASSERT_EQ(data->readings_count, electricity_reading_repo_get_count((struct electricity_reading_repo *)&repo_mock));
   ASSERT_EQ(data->readings[0].power, 4000);
 }
 
@@ -94,4 +94,19 @@ TEST_F(EndpointTest, ShouldRecommendPricePlan) {
   ASSERT_EQ(data->plans_count, recommend_request->limit);
   ASSERT_STREQ(data->plans[0].plan, "price-plan-2");
   ASSERT_EQ(data->plans[0].charge, 4 * 100);
+}
+
+TEST_F(EndpointTest, ShouldGetLastWeekUsage) {
+  electricity_reading_repo_mock_clear(&repo_mock);
+  struct message request = make_request(MESSAGE_LAST_WEEK_USAGE_COST_READ);
+  endpoint_mock_send(&mock.endpoint, &request, sizeof(request));
+
+  meter_process(&meter);
+
+  const struct buffer received = endpoint_mock_receive(&mock.endpoint);
+  ASSERT_GT(received.size, 0);
+  struct message *response = (struct message *)received.data;
+  ASSERT_EQ(response->head.type, MESSAGE_LAST_WEEK_USAGE_COST_READ);
+  struct cost_usage_response *data = (struct cost_usage_response *)response->payload;
+  ASSERT_EQ(data->cost, 0);
 }

@@ -2,6 +2,7 @@
 #define DEVELOPER_JOYOFENERGY_C_MOCK_ELECTRICITY_READING_REPO_MOCK_H
 
 #include <assert.h>
+#include <stdbool.h>
 
 #include "configuration.h"
 #include "domain/electricity_reading_repo.h"
@@ -19,6 +20,10 @@ static inline void electricity_reading_repo_mock_init(struct electricity_reading
     repo->readings[i].power = 4000;
   }
   repo->count = number;
+}
+
+static inline void electricity_reading_repo_mock_clear(struct electricity_reading_repo_mock *repo) {
+  repo->count = 0;
 }
 
 #endif // DEVELOPER_JOYOFENERGY_C_MOCK_ELECTRICITY_READING_REPO_MOCK_H
